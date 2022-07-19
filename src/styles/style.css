@@ -2,3 +2,10 @@
     margin: 0;
     padding: 0;
 }
+main{
+    width: 700px;
+    height: 600px;
+    margin: auto;
+    padding: 10px;
+    background-color: rgba(255, 0, 0, 0.452)
+}
