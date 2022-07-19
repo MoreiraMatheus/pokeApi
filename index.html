@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex usando API</title>
     <link rel="stylesheet" href="src/styles/style.css">
+    <link rel="shortcut icon" href="src/img/pokebola.png" type="image/x-icon">
 </head>
 <body>
-    <main>
-        <h1>POKEAPI</h1>
+    <div id="campo-busca">
         <input type="number" name="num" id="number">
         <button>Buscar</button>
-        <div id="resultado">
-        
+    </div>
+    <main>
+        <!-- <img src="src/img/pokemon-logo.png" alt=""> -->
+        <div id="pokedex">
+            <div id="nome-e-id"></div>
+            <div id="dados-poke"></div>
         </div>
         <script src="src/js/script.js"></script>
     </main>

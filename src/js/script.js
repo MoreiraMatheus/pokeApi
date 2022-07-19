@@ -1,6 +1,8 @@
 const URL_DADOS = 'https://pokeapi.co/api/v2/pokemon/'
 const BT_BUSCA_POKE = document.querySelector('button')
-const RESULT = document.getElementById('resultado')
+const POKEDEX = document.getElementById('pokedex')
+const NOME_ID = document.getElementById('nome-e-id')
+const MOSTRA_INFOS = document.getElementById('dados-poke')
 
 BT_BUSCA_POKE.addEventListener('click', () => {
     const ID_POKE = document.querySelector('input').value
@@ -8,33 +10,39 @@ BT_BUSCA_POKE.addEventListener('click', () => {
         window.alert('informe um id válido')
     }
     else{
-        RESULT.innerHTML = ''
-        const DADOS_DO_POKEMON = consultaApiPoke(ID_POKE, URL_DADOS)
+        NOME_ID.innerHTML = ''
+        MOSTRA_INFOS.innerHTML = ''
+        const DADOS_DO_POKEMON = consultaApiPoke(ID_POKE)
+        
         DADOS_DO_POKEMON.then(res => {
-            RESULT.innerText += res.name + '\n'
-        })
-        DADOS_DO_POKEMON.then(res => {
-            RESULT.innerText += res.id + '\n'
-        })
-        DADOS_DO_POKEMON.then(res => {
+            NOME_ID.appendChild(criaHtml('span', res.name))
+            NOME_ID.appendChild(criaHtml('span', res.id))
+
+            const IMG_NAO_ENCONTRADA = '<img src="src/img/ponto-de-interrogacao.png" alt="foto não encontrada">'
+            const IMG = res.sprites.front_default
+            // const IMG_SHINY = res.sprites.front_shiny
+            !IMG ? MOSTRA_INFOS.innerHTML += IMG_NAO_ENCONTRADA : MOSTRA_INFOS.innerHTML += `<img src="${IMG}" alt="imagem-pokemon">`
+            // !IMG_SHINY ? MOSTRA_INFOS.innerHTML += IMG_NAO_ENCONTRADA : MOSTRA_INFOS.innerHTML += `<img src="${IMG_SHINY}" alt="foto não encontrada">`
+            
             const COMPRIMENTO = res.types.length
             for(let i = 0; i <= COMPRIMENTO -1 ; i++){
-                RESULT.innerText += res.types[i].type.name + '\n'
+                MOSTRA_INFOS.appendChild(criaHtml('p', res.types[i].type.name))
             }
-        })
-        // pegar os sprites do pokemon
-        DADOS_DO_POKEMON.then(res => {
-            RESULT.innerHTML += `<img src="${res.sprites.front_default}" alt="foto não encontrada">`
-        })
-        DADOS_DO_POKEMON.then(res => {
-            RESULT.innerHTML += `<img src="${res.sprites.front_shiny}" alt="foto não encontrada">`
+            console.log(res)
         })
     }
 })
 
-// faz requisição direto da API
-async function consultaApiPoke(id, url){
-    const URL_COMPLETA = await fetch(url + id + '/')
+async function consultaApiPoke(id){
+    const URL_COMPLETA = await fetch(URL_DADOS + id + '/')
     const DADOS_JSON = await URL_COMPLETA.json()
     return await DADOS_JSON
+}
+
+function criaHtml(elemento, conteudo=''){
+    const ELEMENTO = document.createElement(elemento)
+    if(conteudo != ''){
+        ELEMENTO.innerText = conteudo
+    }
+    return ELEMENTO
 }
