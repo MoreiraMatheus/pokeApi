@@ -10,14 +10,26 @@
 </head>
 <body>
     <div id="campo-busca">
-        <input type="number" name="num" id="number">
+        <input type="text" name="num" id="number" placeholder="Nome ou id">
         <button>Buscar</button>
     </div>
     <main>
-        <!-- <img src="src/img/pokemon-logo.png" alt=""> -->
         <div id="pokedex">
-            <div id="nome-e-id"></div>
-            <div id="dados-poke"></div>
+            <div id="nome-e-id">
+                <span>nome poke</span>
+                <span>#000</span>
+            </div>
+            <div id="image-poke">
+                <button id="bt-shiny">Shiny</button>
+                <img src="src/img/ponto-de-interrogacao.png" alt="">
+            </div>
+            <div id="tipos">
+                <h2>Tipos:</h2>
+                <div id="tipos-do-poke">
+                    <p>tipo1</p>
+                    <p>tipo2</p>
+                </div>
+            </div>
         </div>
         <script src="src/js/script.js"></script>
     </main>

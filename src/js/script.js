@@ -1,8 +1,11 @@
 const URL_DADOS = 'https://pokeapi.co/api/v2/pokemon/'
 const BT_BUSCA_POKE = document.querySelector('button')
+const BT_SHINY = document.getElementById('bt-shiny')
 const POKEDEX = document.getElementById('pokedex')
 const NOME_ID = document.getElementById('nome-e-id')
-const MOSTRA_INFOS = document.getElementById('dados-poke')
+const MOSTRA_INFOS = document.getElementById('image-poke')
+const TIPOS = document.getElementById('tipos-do-poke')
+let isShiny = false
 
 BT_BUSCA_POKE.addEventListener('click', () => {
     const ID_POKE = document.querySelector('input').value
@@ -11,12 +14,13 @@ BT_BUSCA_POKE.addEventListener('click', () => {
     }
     else{
         NOME_ID.innerHTML = ''
-        MOSTRA_INFOS.innerHTML = ''
+        MOSTRA_INFOS.innerHTML = '<button id="bt-shiny">Shiny</button>'
+        TIPOS.innerHTML = ''
         const DADOS_DO_POKEMON = consultaApiPoke(ID_POKE)
         
         DADOS_DO_POKEMON.then(res => {
-            NOME_ID.appendChild(criaHtml('span', res.name))
-            NOME_ID.appendChild(criaHtml('span', res.id))
+            NOME_ID.appendChild(criaHtml('span', String(res.name).toLocaleUpperCase()))
+            NOME_ID.appendChild(criaHtml('span', '#' + tratamentoID(res.id)))
 
             const IMG_NAO_ENCONTRADA = '<img src="src/img/ponto-de-interrogacao.png" alt="foto não encontrada">'
             const IMG = res.sprites.front_default
@@ -26,11 +30,14 @@ BT_BUSCA_POKE.addEventListener('click', () => {
             
             const COMPRIMENTO = res.types.length
             for(let i = 0; i <= COMPRIMENTO -1 ; i++){
-                MOSTRA_INFOS.appendChild(criaHtml('p', res.types[i].type.name))
+                TIPOS.appendChild(criaHtml('p', res.types[i].type.name))
             }
-            console.log(res)
         })
     }
+})
+
+BT_SHINY.addEventListener('click', () => {
+    window.alert('ai ai ')
 })
 
 async function consultaApiPoke(id){
@@ -45,4 +52,17 @@ function criaHtml(elemento, conteudo=''){
         ELEMENTO.innerText = conteudo
     }
     return ELEMENTO
+}
+
+function tratamentoID(id){
+    const ID = String(id)
+    if(ID.length == 3){
+        return ID
+    }
+    else if(ID.length == 2){
+        return '0' + ID
+    }
+    else{
+        return '00' + ID
+    }
 }
