@@ -74,19 +74,32 @@ main{
     width: 350px;
     height: 350px;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     /* background-color: aqua; */
 }
 #image-poke button{
     position: relative;
-    width: 40px;
-    top: 15px;
-    left: 155px;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    top: -20px;
+    left: 170px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #ccc;
+}
+#image-poke button:hover{
+    transition: 0.5s;
+    background-color: white;
+    box-shadow: 0 0 10px white;
+}
+#image-poke button img{
+    width: 17px;
 }
 #image-poke img{
     width: 350px;
-    background-color: #ccc;
+    background-color: rgba(204, 204, 204, 0.3);
 }
 
 p{
