@@ -4,7 +4,6 @@ const POKEDEX = document.getElementById('pokedex')
 const NOME_ID = document.getElementById('nome-e-id')
 const IMAGE_POKE = document.getElementById('image-poke')
 const TIPOS = document.getElementById('tipos-do-poke')
-let isShiny = false
 
 BT_BUSCA_POKE.addEventListener('click', () => {
     const ID_POKE = document.querySelector('input').value
@@ -22,7 +21,15 @@ BT_BUSCA_POKE.addEventListener('click', () => {
             const IMG_NORMAL = res.sprites.front_default
             const IMG_SHINY = res.sprites.front_shiny
             //arrumar uma forma de trocar da foto normal pra foto shiny
-            !IMG_NORMAL || !IMG_SHINY ? IMAGE_POKE.innerHTML += IMG_NAO_ENCONTRADA : IMAGE_POKE.innerHTML += `<img src="${IMG_NORMAL}" alt="imagem-pokemon">`
+            if(!IMG_NORMAL || !IMG_SHINY){
+                IMAGE_POKE.innerHTML += IMG_NAO_ENCONTRADA
+            }
+            else{
+                IMAGE_POKE.innerHTML += `<img src="${IMG_NORMAL}"alt="imagem-pokemon">`
+                IMAGE_POKE.innerHTML += `<img src="${IMG_SHINY}"alt="imagem-pokemon">`
+                const FT_SHINY = IMAGE_POKE.querySelectorAll('img')[1]
+                FT_SHINY.classList.add('esconde-ft')
+            }
             
             const COMPRIMENTO = res.types.length
             for(let i = 0; i <= COMPRIMENTO -1 ; i++){
@@ -64,21 +71,11 @@ function tratamentoID(id){
 }
 
 //função que talvez não seja usada
-function mostraShiny(normal=null, shiny=null){
-    if(normal == null || shiny == null){
-        window.alert('em desenvolvimento')
-    }
-    else {
-        if(isShiny){
-            window.alert('vamos ver sua versão shiny')
-            IMAGE_POKE.innerHTML += `<img src="${shiny}" alt="imagem-pokemon">`
-        }
-        else{
-            window.alert('vamos ver sua versão normal')
-            IMAGE_POKE.innerHTML += `<img src="${normal}" alt="imagem-pokemon">`
-        }
-        isShiny ? isShiny = false : isShiny = true
-    }
+function mostraShiny(){
+    const FT_NORMAL = IMAGE_POKE.querySelectorAll('img')[0]
+    const FT_SHINY = IMAGE_POKE.querySelectorAll('img')[1]
+    FT_NORMAL.classList.toggle('esconde-ft')
+    FT_SHINY.classList.toggle('esconde-ft')
 }
 
 function reset(){

@@ -118,3 +118,7 @@ p{
     background-color: #ccc;
     border-radius: 15px 0;
 }
+
+.esconde-ft{
+    display: none;
+}
