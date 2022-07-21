@@ -59,9 +59,10 @@ main{
 }
 
 #nome-e-id{
-    justify-content: space-between;
+    justify-content: space-around;
     /* background-color: blue; */
     margin: 10px;
+    width: 100%;
 }
 #nome-e-id span{
     font-size: 2em;
