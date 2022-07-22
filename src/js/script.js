@@ -25,11 +25,14 @@ async function mostraPoke(){
             
             const IMG_NAO_ENCONTRADA = '<img src="src/img/ponto-de-interrogacao.png" alt="foto não encontrada">'
 
-            const IMG_NORMAL = res.sprites.front_default
+            // const IMG_NORMAL = res.sprites.front_default
+            const IMG_NORMAL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ID_POKE}.png`
             console.log(IMG_NORMAL)
-            const IMG_SHINY = res.sprites.front_shiny
+
+            // const IMG_SHINY = res.sprites.front_shiny
+            const IMG_SHINY = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${ID_POKE}.png`
             console.log(IMG_SHINY)
-            
+
             if(!IMG_NORMAL || !IMG_SHINY){
                 IMAGE_POKE.innerHTML += IMG_NAO_ENCONTRADA
             }
