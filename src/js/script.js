@@ -22,31 +22,16 @@ async function mostraPoke(){
 
             NOME_ID.appendChild(criaHtml('span', String(res.name).toLocaleUpperCase()))
             NOME_ID.appendChild(criaHtml('span', '#' + tratamentoID(res.id)))
-            
-            const IMG_NAO_ENCONTRADA = '<img src="src/img/ponto-de-interrogacao.png" alt="foto não encontrada">'
 
-            // const IMG_NORMAL = res.sprites.front_default
-            // const IMG_NORMAL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ID_POKE}.png`
-            // console.log(IMG_NORMAL)
+            IMAGE_POKE.innerHTML += `<img src="${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ID_POKE}.png`}"alt="imagem-não-encontrada">`
+            IMAGE_POKE.innerHTML += `<img src="${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${ID_POKE}.png`}"alt="imagem-não-encontrada">`
 
-            // const IMG_SHINY = res.sprites.front_shiny
-            // const IMG_SHINY = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${ID_POKE}.png`
-            // console.log(IMG_SHINY)
-
-            if(!`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ID_POKE}.png`|| !`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${ID_POKE}.png`){
-                IMAGE_POKE.innerHTML += IMG_NAO_ENCONTRADA
-            }
-            else{
-                IMAGE_POKE.innerHTML += `<img src="${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ID_POKE}.png`}"alt="imagem-pokemon">`
-                console.log(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ID_POKE}.png`)
-                IMAGE_POKE.innerHTML += `<img src="${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${ID_POKE}.png`}"alt="imagem-pokemon">`
-                const FT_SHINY = IMAGE_POKE.querySelectorAll('img')[1]
-                FT_SHINY.classList.add('esconde-ft')
-                const BT_PARA_SHINY = document.createElement('button')
-                BT_PARA_SHINY.setAttribute('onclick', `mostraShiny()`)
-                BT_PARA_SHINY.innerHTML += '<img src="src/img/stars.png" alt="">'
-                IMAGE_POKE.appendChild(BT_PARA_SHINY)   
-            }
+            const FT_SHINY = IMAGE_POKE.querySelectorAll('img')[1]
+            FT_SHINY.classList.add('esconde-ft')
+            const BT_PARA_SHINY = document.createElement('button')
+            BT_PARA_SHINY.setAttribute('onclick', `mostraShiny()`)
+            BT_PARA_SHINY.innerHTML += '<img src="src/img/stars.png" alt="">'
+            IMAGE_POKE.appendChild(BT_PARA_SHINY)
             
             const COMPRIMENTO = res.types.length
             for(let i = 0; i <= COMPRIMENTO -1 ; i++){
