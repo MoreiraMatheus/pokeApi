@@ -16,7 +16,10 @@ function mostraPoke(){
     else{
         const DADOS_DO_POKEMON = consultaApiPoke(ID_POKE)
         DADOS_DO_POKEMON.then(res => {
-            reset()
+            NOME_ID.innerHTML = ''
+            IMAGE_POKE.innerHTML = ''
+            TIPOS.innerHTML = ''
+            
             NOME_ID.appendChild(criaHtml('span', String(res.name).toLocaleUpperCase()))
             NOME_ID.appendChild(criaHtml('span', '#' + tratamentoID(res.id)))
             
@@ -82,12 +85,6 @@ function mostraShiny(){
     const FT_SHINY = IMAGE_POKE.querySelectorAll('img')[1]
     FT_NORMAL.classList.toggle('esconde-ft')
     FT_SHINY.classList.toggle('esconde-ft')
-}
-
-function reset(){
-    NOME_ID.innerHTML = ''
-    IMAGE_POKE.innerHTML = ''
-    TIPOS.innerHTML = ''
 }
 
 mostraPoke()
