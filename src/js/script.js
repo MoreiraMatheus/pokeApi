@@ -8,7 +8,7 @@ const TIPOS = document.getElementById('tipos-do-poke')
 BT_BUSCA_POKE.addEventListener('click', mostraPoke)
 
 
-function mostraPoke(){
+async function mostraPoke(){
     const ID_POKE = document.querySelector('input').value
     if(!ID_POKE || Number(ID_POKE) <= 0){
         window.alert('Digite valores válidos para busca')
@@ -19,13 +19,17 @@ function mostraPoke(){
             NOME_ID.innerHTML = ''
             IMAGE_POKE.innerHTML = ''
             TIPOS.innerHTML = ''
-            
+
             NOME_ID.appendChild(criaHtml('span', String(res.name).toLocaleUpperCase()))
             NOME_ID.appendChild(criaHtml('span', '#' + tratamentoID(res.id)))
             
             const IMG_NAO_ENCONTRADA = '<img src="src/img/ponto-de-interrogacao.png" alt="foto não encontrada">'
+
             const IMG_NORMAL = res.sprites.front_default
+            console.log(IMG_NORMAL)
             const IMG_SHINY = res.sprites.front_shiny
+            console.log(IMG_SHINY)
+            
             if(!IMG_NORMAL || !IMG_SHINY){
                 IMAGE_POKE.innerHTML += IMG_NAO_ENCONTRADA
             }
@@ -35,7 +39,6 @@ function mostraPoke(){
                 const FT_SHINY = IMAGE_POKE.querySelectorAll('img')[1]
                 FT_SHINY.classList.add('esconde-ft')
                 const BT_PARA_SHINY = document.createElement('button')
-                // BT_PARA_SHINY.innerText = '#'
                 BT_PARA_SHINY.setAttribute('onclick', `mostraShiny()`)
                 BT_PARA_SHINY.innerHTML += '<img src="src/img/stars.png" alt="">'
                 IMAGE_POKE.appendChild(BT_PARA_SHINY)   
